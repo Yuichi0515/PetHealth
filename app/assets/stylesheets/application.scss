@@ -15,20 +15,25 @@
 }
 
 .navbar-devise {
-	background: transparent;
-	border-color: trasparent;
+	background: #fff;
+	border-color: #fff;
 	z-index: 10;
 }
 
 .navbar-devise .navbar-nav >li > a{
-	color: white;
+	color: #222222;
 	font-size: 13px;
 }
 
 .navbar-devise .navbar-brand {
-	color: white;
+	color: #222222;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #fff;
+}
+
+body {
+	color :#222;
+	background-color: #F8F8F8;
 }
