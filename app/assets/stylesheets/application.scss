@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "toastr";
 
 .jumbotron {
 	padding-top: 0px;
@@ -14,23 +15,45 @@
 	color: #fff;
 }
 
-.navbar-devise {
-	background: #fff;
-	border-color: #fff;
-	z-index: 10;
+.navbar-default {
+    background: transparent;
+    border-color: transparent;
+    z-index: 10;
 }
 
-.navbar-devise .navbar-nav >li > a{
-	color: #222222;
-	font-size: 13px;
+.navbar-default .navbar-nav > li > a {
+    color: white;
+    font-size: 13px;
 }
 
-.navbar-devise .navbar-brand {
-	color: #222222;
+.navbar-default .navbar-brand {
+    color: white;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-	background-color: #fff;
+    background-color: #fff;
+}
+
+//navbar-deviseのcss
+.navbar-devise {
+    background: #fff;
+    border-color: #fff;
+    z-index: 10;
+}
+
+.navbar-devise .navbar-nav > li > a {
+    color: #222222;
+    font-size: 13px;
+}
+
+.navbar-devise .navbar-brand {
+    color: #222222;
+}
+
+// トップページのnavbarのドロップダウンがクリックされた時
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	background-color: transparent;
+	color: #555;
 }
 
 body {
