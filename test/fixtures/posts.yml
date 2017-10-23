@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  weight: 1
+  food_requirement: 1
+  walk_time: MyString
+  take_medicine: false
+  users: one
+
+two:
+  description: MyText
+  weight: 1
+  food_requirement: 1
+  walk_time: MyString
+  take_medicine: false
+  users: two
