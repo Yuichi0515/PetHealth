@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.integer :food_requirement
       t.string :walk_time
       t.boolean :take_medicine
-      t.references :users, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

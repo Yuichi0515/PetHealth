@@ -6,7 +6,7 @@ one:
   food_requirement: 1
   walk_time: MyString
   take_medicine: false
-  users: one
+  user: one
 
 two:
   description: MyText
@@ -14,4 +14,4 @@ two:
   food_requirement: 1
   walk_time: MyString
   take_medicine: false
-  users: two
+  user: two
