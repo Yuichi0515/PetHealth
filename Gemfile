@@ -17,6 +17,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'devise'
 gem 'toastr-rails'
+gem "paperclip", "~> 5.0.0"
+gem 'dropzonejs-rails'
 
 
 group :development, :test do

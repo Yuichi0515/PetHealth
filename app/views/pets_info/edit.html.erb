@@ -1,0 +1,54 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="text-center">
+						<span style="font-size:24px;">ペット情報を編集する</span>
+					</div>
+				</div>
+			
+				<div class="panel-body">			
+					<!-- ここからフォーム -->
+					<%= form_for @pet_info,:url => {:action => :create} do |f| %>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label>ペットの種類</label>
+									<%= f.text_field :pet_type, {placeholder: "入力してください", required: 'true', autofocus: 'true', class: 'form-control'} %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label>ペットの年齢</label>
+									<div class="input-group">
+										<%= f.text_field :age, {placeholder: "例：２", required: 'true', autofocus: 'true', class: 'form-control'} %>
+										<span class="input-group-addon">歳</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label>性別</label>
+									<%= f.select :sex, [["オス","オス"], ["メス","メス"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="actions">
+				          <%= f.submit "登録", class: "btn btn-primary" %>
+				        </div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

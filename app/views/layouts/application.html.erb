@@ -3,21 +3,24 @@
   <head>
     <title>PetHealth</title>
     <%= csrf_meta_tags %>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
-
     <% unless flash.empty? %>
       <script type="text/javascript">
         <% flash.each do |f| %>
           <% type = f[0].to_s.gsub('alert','error').gsub('notice','info') %>
+          // toastr.options = {
+          //   positionClass : "toast-top-center"
+          // };
           toastr['<%= type %>']('<%= f[1] %>');
         <% end %>
       </script>
     <% end %>
+    
+    <%= yield %>
   </body>
 </html>

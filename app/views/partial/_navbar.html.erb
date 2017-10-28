@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Brand</a>
+      <a class="navbar-brand" href="/">ペット健康管理システム</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,15 +16,15 @@
       <ul class="nav navbar-nav navbar-right">
         <% if (!user_signed_in?) %>
           <!-- ログインしていない時 -->
-	        <li><%= link_to "シッターになる", new_post_path %></li>
 	        <li><%= link_to "アカウント作成", new_user_registration_path %></li>
         	<li><%= link_to "ログイン", new_user_session_path %></li>
         <% else %>
           <!-- ログインしている時 -->
-          <li><%= link_to "シッターになる", new_post_path %></li>
+          <li><%= link_to "投稿する", new_post_path, data: {"turbolinks" => false} %></li>
+          <li><%= link_to "ペット情報の編集", edit_pets_info_path(current_user) %></li>
         	<li class="dropdown">
         		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        			<%= current_user.email %>	
+        			<%= current_user.name %>	
         		<span class="caret"></span></a>
         		<ul class="dropdown-menu">
               <li><%= link_to "プロフィール", user_path(current_user) %></li>
