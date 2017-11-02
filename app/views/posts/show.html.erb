@@ -1,2 +1,89 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<%= render 'partial/navbar' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="text-center">
+						<span style="font-size:24px;">過去の投稿を確認する　<i class="fa fa-commenting" aria-hidden="true"></i></span>
+					</div>
+				</div>
+			
+				<div class="panel-body">			
+					<!-- ここからフォーム -->
+					<% @posts.reverse_each do |f| %>
+                        <div class="row">
+                            <div class="col-md-12 select">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										投稿(<%= f.created_at %>)
+									</div>
+									<table class="table" rules="all">
+										<tbody>
+											<tr>
+												<td class="mytdIndex" >　体重</td>
+												<td class="mytd" >
+													<% if f.weight.present? %>
+														　<%= f.weight %>　kg
+													<% else %>
+														　記入がありません。	
+													<% end %>
+												</td>
+											</tr>
+											<tr>
+												<td class="mytdIndex">　食事量</td>
+												<td class="mytd" >
+													<% if f.food_requirement.present? %>
+														　<%= f.food_requirement %>　g
+													<% else %>
+														　記入がありません。	
+													<% end %>
+												</td>
+											</tr>
+											<tr>
+												<td class="mytdIndex">　散歩時間</td>
+												<td class="mytd" >
+													<% if f.walk_time.present? %>
+														　<%= f.walk_time %>　分
+													<% else %>
+														　記入がありません。
+													<% end %>
+												</td>
+											</tr>
+											<tr>
+												<td class="mytdIndex">　薬の投与</td>
+												<td class="mytd" >
+													<% if !f.take_medicine.nil? %>
+														<% if f.take_medicine? %>
+															　あげました
+														<% else %>
+															　あげていません
+														<% end %>
+													<% else %>
+														　記入がありません。
+													<% end %>
+												</td>
+											</tr>
+											<tr>
+												<td class="mytdIndex">　健康状態</td>
+												<td class="mytd" >
+													<% if f.description.present? %>
+														　<%= f.description %>
+													<% else %>
+														　記入がありません。
+													<% end %>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+                            </div>
+                        </div>
+                        <br>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -2,48 +2,170 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<div class="panel panel-default">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class="text-center">
-						<span style="font-size:24px;">投稿する</span>
+						<span style="font-size:24px;">ペットの健康状態を投稿する　<i class="fa fa-comment" aria-hidden="true"></i></span>
 					</div>
 				</div>
 			
 				<div class="panel-body">			
 					<!-- ここからフォーム -->
 					<%= form_for @post do |f| %>
+                        <div class="row">
+                            <div class="col-md-12 select">
+                                <div class="form-group">
+                                    <label>体重</label>
+                                    <div class="input-group">
+                                        <%= f.text_field :weight, {placeholder: "例：２", autofocus: 'true', class: 'form-control'} %>
+                                        <span class="input-group-addon">kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12 select">
+                                <div class="form-group">
+                                    <label>食事量</label>
+                                    <div class="input-group">
+                                        <%= f.text_field :food_requirement, {placeholder: "例：50", class: 'form-control'} %>
+                                        <span class="input-group-addon">g</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12 select">
+                                <div class="form-group">
+                                    <label>散歩時間</label>
+                                    <div class="input-group">
+                                        <%= f.text_field :walk_time, {placeholder: "例：50", class: 'form-control'} %>
+                                        <span class="input-group-addon">分</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12 select">
+                                <div class="form-group">
+                                    <label>今日の薬はあげましたか？</label>
+                                    <%= f.select :take_medicine, [["はい","true"], ["いいえ","false"]], {prompt:"選択してください"}, {class: 'form-control'} %>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
 						<div class="row">
 							<div class="col-md-12 select">
-								<div class="form-group">
-									<label>お家の種類</label>
-									<%= f.select :description, [["一軒家","一軒家"], ["マンション","マンション"], ["アパート","アパート"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+								<div class="form-group description">
+									<label>体調</label>
+                                    <%= f.text_area :description, {placeholder: "必須項目です", rows: 5, required: 'true', size: 20, class: 'form-control'} %>
 								</div>
 							</div>
 						</div>
 						<br>
+
+                       <!--  <label>この投稿に画像を添付する</label>
+                        <div class="dropzone" id="mydropzone">
+                            <%= form_for @photo, html: {multipart: true} do |p| %> 
+            
+                                <%= p.hidden_field :post_id, value: @post.id %>
+                                以下id
+                                <%= @post.id %>
+                                <div class="dz-message needsclick">
+                                    <strong>
+                                        <i class="fa fa-file fa-2x" aria-hidden="true"></i>
+                                        <br>
+                                        <br>
+                                        ファイルをドロップするかクリックしてください
+                                    </strong>
+                                </div>
+                                
+                                <div class="fallback">
+                                    <%= f.file_field :image %>
+                                    <%= f.submit "Upload image" %>
+                                </div>
+
+                            <% end %>
+                        </div>
+                        <br> -->
+
 			            <div class="actions">
 							<%= f.submit "Save", class: "btn btn-danger" %>
 						</div>
 					<% end %>
-					<%= form_for @photo, html:{multipart: true,class:"dropzone", id:"my-dropzone" } do |f| %> 
-		                <%= f.hidden_field :post_id, value: @post.id %>
-		                <div class="dz-message needsclick">
-		                    <h5>ファイルをここにドロップしてください。</h5>
-		                    <strong>アップロードするにはここをクリックしてください</strong>
-		                </div>
-		                
-		                <div class="fallback">
-		                    <%= f.file_field :image %>
-		                    <%= f.submit "Upload image" %>
-		                </div>
-		            <% end %>
-		            <br>
+                    
 				</div>
 			</div>
 		</div>
 	</div>
 
 </div>
+
+<script type="text/javascript">
+    Dropzone.autoDiscover = false;
+
+    $("#mydropzone").dropzone({ 
+        maxFilesize: 200,// MB
+        success: function(file, response) {
+            // file.previewElementでpreview要素のhtmlにアクセスできる
+            // add .dz-success class to file.previewElement
+            $(file.previewElement).addClass('dz-success');
+            // add response.uploadId to dz-remove class
+            $(file.previewElement).find('.dz-remove').attr('id', response.photoId);
+        },
+        removedfile: function(file) {
+            //削除選択されたfileのidを取得
+            var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+            // call photos_contoroller.rb destroy action
+            $.ajax({
+                type: 'DELETE',
+                url: "/photos/" +id,
+                success: function(data) {
+                    console.log(data.message);
+                }
+            });
+            var previewElement;
+            // 条件式 ? 式１ : 式２　条件式の値がtrue=>式１、false=>式２を返す
+            // parentNode => 親ノード（１つ上のhtml要素）を取得
+            // (void 0) => 何も処理しない
+            // リスト（親ノード）から、プレビュー要素を消すという記述
+            return (previewElement = file.previewElement) != null ? (previewElement.parentNode.removeChild(file.previewElement)) : (void 0);
+        },
+        init: function(){
+            // this equal dropzone
+            var me = this;
+
+            // meに"complete"イベントを定義
+            me.on("complete", function(file) {
+                $(file.previewTemplate).find('.dz-remove').text("削除する");
+            });
+            // call list function in photos_contoroller.rb with get method
+            $.ajax({
+                type: "GET",
+                url: "/photos",
+                success: function(data) {
+                    $.each(data.images, function(key, value) {
+                        if(data.images != undefined && data.images.length > 0){
+                            me.emit("addedfile", value);// addedfileイベントをvalueのデータで実行する
+                            me.emit("thumbnail", value, value.src);// thumbnailイベントをvalueのデータで実行する
+                            me.emit("complete", value); // completeイベントをvalueのデータで実行する
+                            $(value._removeLink).attr("id", value.id); // valueの_removeLinkのidにvalue.idを追加
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+
 
 <script type="text/javascript">
     $(function(){

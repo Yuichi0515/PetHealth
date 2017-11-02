@@ -1,6 +1,8 @@
 class PhotosController < ApplicationController
 	def create
+    logger.debug "行くで"
     @photo = Photo.new(photo_params)
+    logger.debug "きてはいる"
     # if @photo.save
     #   render json: { message: "success", photoId: @photo.id }, status: 200
     # else
@@ -35,6 +37,6 @@ class PhotosController < ApplicationController
 
   private
   def photo_params
-  	params.require(:photo).permit(:image, :post_id)
+  	params.require(:photo).permit(:image)
   end
 end

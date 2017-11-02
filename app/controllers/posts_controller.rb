@@ -6,10 +6,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    @posts = current_user.posts.all
   end
 
   def new
-    @post = current_user.posts.build
+    @post = Post.new
     @photo = Photo.new
   end
 
@@ -18,7 +19,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(posts_params)
 
     if @post.save
-      redirect_to manage_post_basics_path(@post), notice: "投稿しました"
+      redirect_to post_path(@post), notice: "投稿しました"
     else
       redirect_to new_post_path, notice: "投稿できませんでした"
     end
@@ -38,7 +39,7 @@ class PostsController < ApplicationController
 
   private
   def posts_params
-    params.require(:post).permit(:description, :weight, :food_requirement, :walk_time, :take_medicine)
+    params.require(:post).permit(:description, :weight, :food_requirement, :walk_time, :take_medicine, :image)
   end
 
   def set_post

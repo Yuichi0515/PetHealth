@@ -19,9 +19,9 @@
 			<div class="user-profile row-space-4 text-center">
 			</div>
 
-			<div class="panel panel-default verifications hidden-xs hidden-sm">
+			<div class="panel panel-primary verifications hidden-xs hidden-sm">
 				<div class="panel-heading">
-					認証済みID
+					認証済みID　<i class="fa fa-certificate" aria-hidden="true"></i>
 				</div>
 				<div class="panel-body">
 					<div id="ver-email">
@@ -36,9 +36,43 @@
 		</div>
 
 		<div class="col-lg-9 col-md-8 col-sm-12">
-			<h1>こんにちは <%= @user.name %> さん</h1>
-			<p>自己紹介</p>
-			<%= @user.description %>
+			<div class="hello-user">
+				<h1 align="center">こんにちは、<%= @user.name %> さん</h1>
+			</div>
+			<br>
+			<br>
+			<div class="panel panel-info">
+				<div class="panel-heading title">
+					<h2><i class="fa fa-user-o" aria-hidden="true"></i>　自己紹介</h2>
+				</div>
+				<div class="panel-body content">
+					<%= @user.description %>
+				</div>
+			</div>
+			<br>
+			<div class="panel panel-info">
+				<div class="panel-heading title">
+					<h2><i class="fa fa-paw" aria-hidden="true"></i>　ペット</h2>
+				</div>
+				<div class="panel-body content">
+					<div>
+						<span class="bold">名前</span><span class="bold-value">　<%= @pet_info.name %></span>
+					</div>
+					<hr class="style-six">
+					<div>
+						<span class="bold">種類</span><span class="bold-value">　<%= @pet_info.pet_type %></span>	
+					</div>
+					<hr class="style-six">
+					<div>
+						<span class="bold">歳　</span><span class="bold-value">　<%= @pet_info.age %>歳</span>	
+					</div>
+					<hr class="style-six">
+					<div>
+						<span class="bold">性別</span><span class="bold-value">　<%= @pet_info.sex %></span>	
+					</div>
+					<hr class="style-six">
+				</div>
+			</div>
 		</div>
 	</div>  	
 </div>

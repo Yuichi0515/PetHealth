@@ -7,8 +7,8 @@
     </div>
 
     <div class="col-md-9">
-      <div class="panel panel-default">
-        <div class="panel-heading">プロフィールを編集</div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">プロフィールを編集　<i class="fa fa-pencil" aria-hidden="true"></i></div>
         <div class="panel-body">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render 'partial/deviseErrorMsg' %>

@@ -1,6 +1,6 @@
 class PetsInfoController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_pet_info, only: [:edit]
+  before_action :set_pet_info, only: [:edit, :update]
 
   def index
   end
@@ -21,7 +21,7 @@ class PetsInfoController < ApplicationController
       redirect_to user_path(current_user.id), notice: "保存が完了しました"
     else
       #saveを失敗すると新規作成ページへ
-	  render new_pets_info_path, notice: "保存できませんでした"
+	     render new_pets_info_path, notice: "保存できませんでした"
     end
   end
 
@@ -29,11 +29,16 @@ class PetsInfoController < ApplicationController
   end
 
   def update
+    if @pet_info.update_attributes(pet_info_params)
+      redirect_to user_path(current_user.id), notice: "保存が完了しました"
+    else
+      render edit_pets_info_path, notice: "保存できませんでした"
+    end
   end
 
   private
   def pet_info_params
-    params.require(:pet_info).permit(:pet_type, :age, :sex)
+    params.require(:pet_info).permit(:pet_type, :age, :sex, :name)
   end
 
   def set_pet_info
