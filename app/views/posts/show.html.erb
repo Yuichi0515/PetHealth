@@ -74,6 +74,23 @@
 													<% end %>
 												</td>
 											</tr>
+											<% if f.photos.present? %> 
+												<% f.photos.reverse_each do |p| %>
+													<tr>
+														<td class="mytdIndex">　写真</td>
+														<td class="mytd" >
+															<%= image_tag p.image, :width => '400' %>
+														</td>
+													</tr>
+												<% end %>
+											<% else %>
+												<tr>
+													<td class="mytdIndex">　写真</td>
+													<td class="mytd" >
+														　添付していません。
+													</td>
+												</tr>
+											<% end %>
 										</tbody>
 									</table>
 								</div>

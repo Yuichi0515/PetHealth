@@ -1,14 +1,10 @@
 <%= render 'partial/navbar' %>
 <div class="container">
-    <div class="col-md-3">
-        <!-- vertical-navbar -->
-        <%= render 'partial/verticalnavbar'%>
-    </div>
-    <div class="col-md-9">
+    <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-center">
-                    <span style="font-size:24px;">リスティング写真の編集</span>
+                    <span style="font-size:24px;">この投稿に写真を添付する</span>
                 </div>
             </div>
 
@@ -17,8 +13,8 @@
             
                     <%= f.hidden_field :post_id, value: @post.id %>
                     <div class="dz-message needsclick">
-                        <h3>ファイルをここにドロップしてください。</h3>
-                        <strong>アップロードするにはここをクリックしてください</strong>
+                        <h3><i class="fa fa-file fa-2x" aria-hidden="true"></i></h3>
+                        <strong>アップロードするにはここをクリックするかファイルをドラッグ</strong>
                     </div>
                     
                     <div class="fallback">
@@ -27,6 +23,8 @@
                     </div>
 
                 <% end %>
+                <br>
+                <%= button_to "投稿を見る", {controller: 'posts', action: 'show'}, {method: :get, class: "btn btn-danger"} %>
             </div>
         </div>
     </div>
@@ -76,9 +74,10 @@
                     $(file.previewTemplate).find('.dz-remove').text("削除する");
                 });
                 // call list function in photos_contoroller.rb with get method
+                var id = $(file.previewTemplate).find('.dz-remove').attr('id');
                 $.ajax({
-                    type: "GET",
-                    url: "/photos/list",
+                    type: "POST",
+                    url: "/photos",
                     data: {'post_id': <%= @post.id%>},
                         dataType: 'json',
                     success: function(data) {

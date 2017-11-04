@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:basics, :description]
+  before_action :set_post, only: [:basics, :description, :photos]
 
   def index
   end
@@ -11,7 +11,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @photo = Photo.new
   end
 
   def create
@@ -19,7 +18,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(posts_params)
 
     if @post.save
-      redirect_to post_path(@post), notice: "投稿しました"
+      redirect_to manage_post_photos_path(@post), notice: "投稿しました"
     else
       redirect_to new_post_path, notice: "投稿できませんでした"
     end
@@ -37,9 +36,13 @@ class PostsController < ApplicationController
   def description
   end
 
+  def photos
+    @photo = Photo.new
+  end
+
   private
   def posts_params
-    params.require(:post).permit(:description, :weight, :food_requirement, :walk_time, :take_medicine, :image)
+    params.require(:post).permit(:description, :weight, :food_requirement, :walk_time, :take_medicine)
   end
 
   def set_post
