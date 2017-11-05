@@ -214,7 +214,42 @@ hr.style-six {
   transition: .4s;
 }
 
+.fa-big {
+  font-size: 15em;
+  color :#000;
+}
+
+.help-block {
+  margin-left:20px;
+  font-size: 10px;
+}
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+}
+
 body {
 	color :#222;
 	background-color: #F8F8F8;
+}
+
+.other-user {
+  margin: auto;
+  width: 400px;
+  text-align: center;
+  padding-bottom: .5em;
+  border-bottom: 1px solid #ccc;
+}
+
+.swiper-container {
+    width: 750px;
+    height: 350px;
+    margin: 0 auto;
+}
+
+.swiper-slide {
+    text-align: center;
+    line-height: 250px;
 }

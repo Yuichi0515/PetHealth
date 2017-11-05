@@ -15,4 +15,19 @@
 	</div>
 </div>
 
-<h3>他のユーザー</h3>
+<h1 class="other-user">他のユーザー</h1>
+
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<% @users.reverse_each do |user| %>
+			<div class="swiper-slide"> 
+				<%=user.name%>
+				<!-- Slide-01　コンテンツを挿入する -->
+			</div>
+		<% end %>
+	</div>
+	<div class="swiper-pagination"></div>
+	<div class="swiper-button-prev"></div>
+	<div class="swiper-button-next"></div>
+	<div class="swiper-scrollbar"></div>
+</div>
