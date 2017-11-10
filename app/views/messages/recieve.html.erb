@@ -9,13 +9,13 @@
 
 	    <div class="col-md-9">
       <div class="panel panel-primary">
-        <div class="panel-heading">メッセージ送信履歴　<i class="fa fa-envelope" aria-hidden="true"></i></div>
+        <div class="panel-heading">メッセージ受信履歴　<i class="fa fa-envelope" aria-hidden="true"></i></div>
 	        <div class="panel-body">
 				<% if @messages.present? %>
 					<% @messages.each do |msg| %>
-							<div onclick="obj=document.getElementById(<%= msg.id %>).style; obj.display=(obj.display=='none')?'block':'none';">
+						<div onclick="obj=document.getElementById(<%= msg.id %>).style;obj.display=(obj.display=='none')?'block':'none';changeFlag(<%= msg.id %>)";>
 							<a class="openButton btn btn-info">
-								<div class="title"><span class="big">タイトル：</span><%= msg.title %>　　<span class="big">送信先：</span><%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
+								<div class="title"><span class="big">タイトル：</span><%= msg.title %>　　<span class="big">送信者：</span><%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
 								<div class="attention">▼ クリックで展開</div>
 							</a>
 						</div>
@@ -42,3 +42,13 @@
 	    </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function changeFlag(flag) {
+		console.log("changeFlag function");
+		$.ajax({
+			url: "/messages/" +flag,
+			type: "get",
+		});
+	}
+</script>

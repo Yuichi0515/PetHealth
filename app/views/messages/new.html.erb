@@ -1,0 +1,42 @@
+<%= render 'partial/navbar' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 row-space-4">
+		    <!-- 自分のプロフィールへのリンク -->
+		    <%= render 'partial/message' %>
+	    </div>
+
+	    <div class="col-md-9">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><%= @post_to.name %> さんへの新規メッセージ　<i class="fa fa-envelope" aria-hidden="true"></i></div>
+	        <div class="panel-body">
+				<%= form_for @message do |m| %>
+					<div class="row">
+                        <div class="col-md-12 select">
+                            <div class="form-group">
+                                <label>タイトル</label>
+                                <%= m.text_field :title, {placeholder: "タイトルを入力してください", autofocus: 'true', class: 'form-control'} %>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+					<div class="row">
+						<div class="col-md-12 select">
+							<div class="form-group">
+								<label>内容</label>
+	                            <%= m.text_area :message, {placeholder: "必須項目です", rows: 5, required: 'true', size: 20, class: 'form-control'} %>
+							</div>
+						</div>
+					</div>
+					<br>
+					<%= m.hidden_field :post_to_id, :value => @post_to.id %>
+		            <div class="actions">
+						<%= m.submit "送信", class: "btn btn-danger" %>
+					</div>
+				<% end %>
+	        </div>
+	    </div>
+	</div>
+</div>

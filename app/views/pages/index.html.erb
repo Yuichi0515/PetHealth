@@ -76,6 +76,9 @@
 							<% end %>
 						</tbody>
 					</table>
+					<% if user != current_user %>
+						<%= link_to "メッセージを送る", new_message_path(user.id), class: "btn btn-primary send-message"%>
+					<% end %>
 				</div>
 			</div>
 
