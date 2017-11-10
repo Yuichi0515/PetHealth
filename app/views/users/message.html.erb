@@ -1,0 +1,44 @@
+<%= render 'partial/navbar' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 row-space-4">
+		    <!-- 自分のプロフィールへのリンク -->
+		    <%= link_to "送信履歴を確認する", message_user_path(current_user), class: "btn btn-default btn-full" %>
+	    </div>
+
+	    <div class="col-md-9">
+      <div class="panel panel-primary">
+        <div class="panel-heading">メッセージ送信履歴　<i class="fa fa-envelope" aria-hidden="true"></i></div>
+	        <div class="panel-body">
+						<% if @messages.present? %>
+							<% @messages.each do |msg| %>
+									<div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+									<a class="openButton btn btn-info">
+										<div class="title">送信先：<%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
+										<div class="attention">▼ クリックで展開</div>
+									</a>
+								</div>
+								<div id="open" style="display:none;clear:both;">
+									<table class="message-table">
+										<thead>
+											<tr>
+												<th class="content">内　容</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="message"><%= msg.message %></td>
+											</tr>
+										</tbody>
+									</table>
+							  </div>
+							<% end %>
+						<% else %>
+							メッセージはありません。
+						<% end %>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</div>

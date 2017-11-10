@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :posts, :pets_info
   devise_for :users, controllers: { registrations: 'registrations' }
   root :to => "pages#index"
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :message
+    end
+  end
   resources :photos, only: [:create, :destroy, :update] do
   	collection do
   		get :posting

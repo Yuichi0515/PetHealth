@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :pet_infos
+  has_many :pet_infos
+  has_many :messages
 
   validates :email, presence: true
   validates :name, presence: true

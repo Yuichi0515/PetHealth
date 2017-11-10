@@ -21,9 +21,64 @@
 	<div class="swiper-wrapper">
 		<% @users.reverse_each do |user| %>
 			<div class="swiper-slide"> 
-				<%=user.name%>
-				<!-- Slide-01　コンテンツを挿入する -->
+
+				<div class="show-user">			
+					<table>
+						<tbody>
+							<% if user.pet_infos.blank? %>
+								<tr>
+									<td>
+										<% if user.avatar? %>
+											<%= image_tag user.avatar, class: "avatar-show" %>
+										<% else %>
+											<span class="no-avatar">no image</span>
+										<% end %>
+									</td>
+									<td>
+										　<i class="fa fa-paw" aria-hidden="true"></i>自己紹介：<%= user.description %>
+									</td>
+								</tr>
+								<tr>
+									<td align="center" style="font-weight: bold;background: #ECECEC;color: #00BCD4;font-size: 25px;border-radius: 20px;"><%=user.name%></td>
+									<td>
+										　<i class="fa fa-paw" aria-hidden="true"></i>ペットについての情報はありません。
+									</td>
+								</tr>
+
+							<% else %>
+								<tr>
+									<td rowspan="4">
+										<% if user.avatar? %>
+											<%= image_tag user.avatar, class: "avatar-show" %>
+										<% else %>
+											<span class="no-avatar">no image</span>
+										<% end %>
+									</td>
+									<td>
+										　<i class="fa fa-paw" aria-hidden="true"></i>自己紹介：<%= user.description %>
+									</td>
+								</tr>
+								<% user.pet_infos.each do |pet_info| %>
+									<tr>
+										<td>　<i class="fa fa-paw" aria-hidden="true"></i>ペットの種類：<%= pet_info.pet_type %></td>
+									</tr>
+									<tr>
+										<td>　<i class="fa fa-paw" aria-hidden="true"></i>ペットの名前：<%= pet_info.name %></td>
+									</tr>
+									<tr>
+										<td>　<i class="fa fa-paw" aria-hidden="true"></i>ペットの年齢：<%= pet_info.age %></td>
+									</tr>
+									<tr>
+										<td align="center" style="font-weight: bold;background: #ECECEC;color: #00BCD4;font-size: 25px;border-radius: 20px;"><%=user.name%></td>
+										<td>　<i class="fa fa-paw" aria-hidden="true"></i>ペットの性別：<%= pet_info.sex %></td>
+									</tr>
+								<% end %>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
 			</div>
+
 		<% end %>
 	</div>
 	<div class="swiper-pagination"></div>
@@ -31,3 +86,4 @@
 	<div class="swiper-button-next"></div>
 	<div class="swiper-scrollbar"></div>
 </div>
+

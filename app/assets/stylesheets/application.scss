@@ -219,6 +219,11 @@ hr.style-six {
   color :#000;
 }
 
+.fa-big-show {
+  font-size: 10em;
+  color :#000;
+}
+
 .help-block {
   margin-left:20px;
   font-size: 10px;
@@ -228,6 +233,34 @@ hr.style-six {
   width: 250px;
   height: 250px;
   border-radius: 100%;
+  object-fit: cover;
+}
+
+.avatar-show {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.show-user {
+  margin-left: 50px;
+  position: relative;
+}
+
+.show-user span {
+  postition: absolute;
+}
+
+.no-avatar {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  text-align:center;
+  line-height: 200px;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: solid 1px;
 }
 
 body {
@@ -244,12 +277,50 @@ body {
 }
 
 .swiper-container {
-    width: 750px;
-    height: 350px;
-    margin: 0 auto;
+  width: 750px;
+  height: 350px;
+  margin: 0 auto;
 }
 
 .swiper-slide {
-    text-align: center;
-    line-height: 250px;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.show-content {
+  width: 250px;
+}
+
+.openButton {
+  cursor:pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+div.title {
+  text-align: left;
+  float: left;
+}
+
+div.attention {
+  text-align: right;
+}
+
+td.message {
+  padding: 15px 15px;
+  border-radius: 0 20px 20px 0;
+}
+
+th.content {
+  background-color: #b7e2fb;
+  text-align: center;
+  padding: 10px 10px;
+}
+
+.message-table {
+  border: 3px solid #b7e2fb;
+  width: 90%;
+  text-align: left;
+  margin: auto;
 }
