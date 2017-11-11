@@ -1,4 +1,4 @@
-<%= render 'partial/navbar' %>
+<%= render 'partial/navbar', messages: @messages %>
 
 <div class="container">
 	<div class="row">
@@ -14,10 +14,17 @@
 				<% if @messages.present? %>
 					<% @messages.each do |msg| %>
 						<div onclick="obj=document.getElementById(<%= msg.id %>).style;obj.display=(obj.display=='none')?'block':'none';changeFlag(<%= msg.id %>)";>
-							<a class="openButton btn btn-info">
-								<div class="title"><span class="big">タイトル：</span><%= msg.title %>　　<span class="big">送信者：</span><%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
-								<div class="attention">▼ クリックで展開</div>
-							</a>
+							<% if msg.read_flag %>
+								<a class="openButton btn btn-info">
+									<div class="title"><span class="big">タイトル：</span><%= msg.title %>　　<span class="big">送信者：</span><%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
+									<div class="attention">▼ クリックで展開</div>
+								</a>
+							<% else %>
+								<a class="openButton btn btn-success">
+									<div class="title"><span class="big">タイトル：</span><%= msg.title %>　　<span class="big">送信者：</span><%= msg.post_to.name %> (送信日時:<%= msg.created_at %>. )</div>
+									<div class="attention">▼ クリックで展開</div>
+								</a>
+							<% end %>
 						</div>
 						<div id=<%= msg.id %> style="display:none;clear:both;">
 							<table class="message-table">

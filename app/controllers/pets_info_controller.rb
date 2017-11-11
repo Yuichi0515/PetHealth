@@ -42,6 +42,6 @@ class PetsInfoController < ApplicationController
   end
 
   def set_pet_info
-    @pet_info = PetInfo.find(params[:id])
+    @pet_info = PetInfo.where(user_id: params[:id]).first
   end
 end

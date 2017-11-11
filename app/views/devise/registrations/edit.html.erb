@@ -38,22 +38,11 @@
             <br>
 
             <%= f.label :プロフィール写真 %><br />
-             <div class="input-group">
-                <label class="input-group-btn">
-                    <span class="btn btn-info">
-                        写真を追加&hellip; <input type="file" style="display: none;" multiple>
-                    </span>
-                </label>
-                <input type="text" class="form-control" readonly>
-            </div>
+            <%= f.file_field :avatar%>
             <span class="help-block">
-                プロフィール写真を追加、変更するには上の「写真を追加」ボタンを押し、画像を変更してください。
+                プロフィール写真を追加、変更するには上の「ファイルを選択」ボタンを押し、画像を変更してください。
             </span>
             <br>
-
-            <div class="field">
-              <%= f.file_field :avatar %>
-            </div>
 
             <div class="form-group">
               <%= f.label :新しいパスワード %> <i>(変更しない場合は空欄で構いません)</i><br />
@@ -86,7 +75,17 @@
       var input = $(this),
           numFiles = input.get(0).files ? input.get(0).files.length : 1,
           label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-      input.trigger('fileselect', [numFiles, label]);
+          // input.trigger('fileselect', [numFiles, label]);
+
+      var files = !!this.files ? this.files : [];
+      if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+      if (/^image/.test( files[0].type)){ // only image file
+          var reader = new FileReader(); // instance of the FileReader
+          reader.readAsDataURL(files[0]); // read the local file
+          reader.onloadend = function(){ // set image data as background of div
+              input.parent().parent().parent().prev('.imagePreview').css("background-image", "url("+this.result+")");
+          }
+      }
     });
 
     // We can watch for our custom `fileselect` event like this

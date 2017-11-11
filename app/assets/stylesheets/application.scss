@@ -192,12 +192,12 @@ hr.style-six {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.panel-heading.title{
+.panel-heading.title-user, .panel-heading.title-pet {
   margin: auto;
   text-align: center;
 }
 
-.panel-body.content {
+.panel-body.content-user, .panel-body.content-pet {
   margin-left:20px;
   font-size: 20px;
 }

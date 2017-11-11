@@ -21,7 +21,19 @@
         <% else %>
           <!-- ログインしている時 -->
           <li><%= link_to "プロフィールページ", user_path(current_user) %></li>
-          <li><%= link_to "メッセージを確認", message_user_path(current_user) %></li>
+          <li>
+            <%= link_to recieve_message_path(current_user), method: :get do %>
+              メッセージを確認
+              <% if defined?(messages) %>
+                <% messages.each do |msg| %>
+                  <% unless msg.read_flag %>
+                      <i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"></i>
+                    <% break %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
