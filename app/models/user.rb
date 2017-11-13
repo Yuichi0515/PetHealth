@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :pet_infos
   has_many :pet_infos
   has_many :messages
+  has_many :relationships
+  has_many :pre_relationships
 
   validates :email, presence: true
   validates :name, presence: true

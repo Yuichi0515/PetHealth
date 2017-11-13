@@ -52,6 +52,19 @@
         		<ul class="dropdown-menu">
               <li><%= link_to "プロフィール編集", edit_user_registration_path %></li>
               <li><%= link_to "ペット情報の編集", edit_pets_info_path(current_user) %></li>
+              <li>
+                <%= link_to relationship_path(current_user), method: :get do %>
+                  フレンド
+                  <% if defined?(friends) %>
+                    <% messages.each do |msg| %>
+                      <% unless msg.read_flag %>
+                          <i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"></i>
+                        <% break %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </li>
         			<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
         		</ul>
         	</li>

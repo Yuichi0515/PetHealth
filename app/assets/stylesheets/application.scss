@@ -277,8 +277,8 @@ body {
 }
 
 .swiper-container {
-  width: 750px;
-  height: 350px;
+  width: 800px;
+  height: 450px;
   margin: 0 auto;
 }
 
@@ -332,4 +332,9 @@ th.content {
 
 .big {
   font-weight: bold;
+}
+td.content {
+  background-color: #b7e2fb;
+  text-align: center;
+  width: 100px;
 }

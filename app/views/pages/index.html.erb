@@ -15,14 +15,14 @@
 	</div>
 </div>
 
-<h1 class="other-user">他のユーザー</h1>
+<h1 class="other-user">ユーザー一覧</h1>
 
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		<% @users.reverse_each do |user| %>
-			<div class="swiper-slide"> 
-
-				<div class="show-user">			
+			<div class="swiper-slide">
+				<% friend_flag = false %>
+				<div class="show-user">
 					<table>
 						<tbody>
 							<% if user.pet_infos.blank? %>
@@ -76,12 +76,21 @@
 							<% end %>
 						</tbody>
 					</table>
-					<% if user != current_user %>
+					<% if user != current_user && current_user.present? %>
 						<%= link_to "メッセージを送る", new_message_path(user.id), class: "btn btn-primary send-message"%>
+						<% if @friends.present? %>
+							<% @friends.each do |frd| %>
+								<% if frd.friend == user.id %>
+									<% friend_flag = true %>
+								<% end %>
+							<% end %>
+						<% end %>
+						<% if friend_flag == false %>
+							<%= link_to "友達申請する", pre_relationship_path(user.id), class: "btn btn-primary send-message", method: :post%>
+						<% end %>
 					<% end %>
 				</div>
 			</div>
-
 		<% end %>
 	</div>
 	<div class="swiper-pagination"></div>
@@ -89,4 +98,3 @@
 	<div class="swiper-button-next"></div>
 	<div class="swiper-scrollbar"></div>
 </div>
-

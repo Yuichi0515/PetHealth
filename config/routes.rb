@@ -17,7 +17,15 @@ Rails.application.routes.draw do
       get :recieve
     end
   end
+  resources :relationships, only: [:destroy, :show, :new]
+  resources :pre_relationships, only: [:show, :new] do
+    member do
+      post :create
+    end
+  end
 
+  get '/relationships/:from/:to' => 'relationships#create', as: 'relationships'
+  delete '/pre_relationships/:from/:to' => 'pre_relationships#destroy'
   get 'messages/:flag' => 'messages#change_flag', as: 'change_flag'
   get 'new_message/:post_to' => 'messages#new', as: 'new_message'
   get 'manage_post/:id/basics' => 'posts#basics', as: 'manage_post_basics'
